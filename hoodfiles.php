@@ -30,7 +30,7 @@ while ( $result = $rs->fetch ( PDO::FETCH_ASSOC ) ) {
 		$ispoly = true;
 	}
 
-	echo 'ID: '.$result['ID'].' ; Name: '.$result['name'].' ; lat: '.$result['lat'].' ; lon: '.$result['lon'].' ; type: '.($ispoly ? 'poly' : 'classic').' ; <a href="http://keyserver.freifunk-franken.de/v2/?lat='.$result['lat'].'&long='.$result['lon'].'">zum Hoodfile</a><br>';
+	echo 'ID: '.$result['ID'].' ; Name: '.$result['name'].' ; lat: '.$result['lat'].' ; lon: '.$result['lon'].' ; type: '.($ispoly ? 'poly' : 'classic').' ; <a href="index.php?hoodid='.$result['ID'].'">zum Hoodfile</a><br>';
 }
 
 ?>

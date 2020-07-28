@@ -35,6 +35,7 @@ CREATE TABLE `gateways` (
   `ip` varchar(80) NOT NULL,
   `port` smallint(5) unsigned NOT NULL,
   `hood_ID` int(10) unsigned NOT NULL DEFAULT '1',
+  `contact` varchar(100) NOT NULL DEFAULT '',
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -42,14 +43,14 @@ CREATE TABLE `gateways` (
 -- Dumping data for table `gateways`
 --
 
-INSERT INTO `gateways` (`ID`, `name`, `publickey`, `ip`, `port`, `hood_ID`, `timestamp`) VALUES
-(2, 'vm3fffgwcd1', '373cf6dca701a8b1516b816a13c91dc9df29ac5a822d12331b503982d655399b', '144.76.70.186', 10007, 0, '2017-09-27 07:15:09'),
-(7, 'fff-nue2-gw2', '07be3d18b703e6e040a6920afb3e226ded6aa474961d8eecbb77b623bdd21059', '81.95.4.187', 10000, 2, '2017-10-28 05:45:51'),
-(8, 'vm3fffgwcd1', '373cf6dca701a8b1516b816a13c91dc9df29ac5a822d12331b503982d655399b', '144.76.70.186', 10006, 1, '2017-09-27 07:15:09'),
-(9, 'vm3fffgwcd1', '373cf6dca701a8b1516b816a13c91dc9df29ac5a822d12331b503982d655399b', '144.76.70.186', 10005, 30, '2017-09-27 07:15:09'),
-(46, 'fff-neptun', '3834e45fa33c048f975e81042c1e93bb11dac82d9f03a0b24071bb72205247a8', '84.23.95.3', 10011, 31, '2018-09-02 09:00:59'),
-(47, 'fff-neptun', '3834e45fa33c048f975e81042c1e93bb11dac82d9f03a0b24071bb72205247a8', '84.23.95.3', 10012, 0, '2018-09-02 14:36:14'),
-(49, 'fff-neptun', '3834e45fa33c048f975e81042c1e93bb11dac82d9f03a0b24071bb72205247a8', '84.23.95.3', 10013, 1, '2018-09-02 14:36:14');
+INSERT INTO `gateways` (`ID`, `name`, `publickey`, `ip`, `port`, `hood_ID`, `contact`, `timestamp`) VALUES
+(2, 'vm3fffgwcd1', '373cf6dca701a8b1516b816a13c91dc9df29ac5a822d12331b503982d655399b', '144.76.70.186', 10007, 0, 'a@b.com', '2017-09-27 07:15:09'),
+(7, 'fff-nue2-gw2', '07be3d18b703e6e040a6920afb3e226ded6aa474961d8eecbb77b623bdd21059', '81.95.4.187', 10000, 2, 'b@a.net', '2017-10-28 05:45:51'),
+(8, 'vm3fffgwcd1', '373cf6dca701a8b1516b816a13c91dc9df29ac5a822d12331b503982d655399b', '144.76.70.186', 10006, 1, '', '2017-09-27 07:15:09'),
+(9, 'vm3fffgwcd1', '373cf6dca701a8b1516b816a13c91dc9df29ac5a822d12331b503982d655399b', '144.76.70.186', 10005, 30, '', '2017-09-27 07:15:09'),
+(46, 'fff-neptun', '3834e45fa33c048f975e81042c1e93bb11dac82d9f03a0b24071bb72205247a8', '84.23.95.3', 10011, 31, '', '2018-09-02 09:00:59'),
+(47, 'fff-neptun', '3834e45fa33c048f975e81042c1e93bb11dac82d9f03a0b24071bb72205247a8', '84.23.95.3', 10012, 0, '', '2018-09-02 14:36:14'),
+(49, 'fff-neptun', '3834e45fa33c048f975e81042c1e93bb11dac82d9f03a0b24071bb72205247a8', '84.23.95.3', 10013, 1, '', '2018-09-02 14:36:14');
 
 
 -- --------------------------------------------------------

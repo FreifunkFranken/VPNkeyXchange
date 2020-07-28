@@ -7,7 +7,7 @@ $hoodfilemode = isset($_GET['hoodfile']);
 $polydata = getPolyhoodsByHood(); // read polygon data for later use
 
 try {
-	$q = 'SELECT ID, name, net, lat, lon, ESSID_AP FROM hoods;';
+	$q = 'SELECT ID, name, lat, lon, ESSID_AP FROM hoods;';
 	$rs = db::getInstance()->prepare($q);
 	$rs->execute();
 } catch (PDOException $e) {
@@ -19,7 +19,6 @@ while ( $result = $rs->fetch ( PDO::FETCH_ASSOC ) ) {
 	$hood = array();
 	$hood['id']   = intval($result['ID']);
 	$hood['name'] = $result['name'];
-	$hood['net']  = $result['net'];
 	$hood['essid_ap'] = $result['ESSID_AP'];
 	if ($result ['lat'] > 0 && $result ['lon'] > 0) {
 		$hood['lat'] = floatval($result['lat']);
@@ -46,7 +45,7 @@ while ( $result = $rs->fetch ( PDO::FETCH_ASSOC ) ) {
 			$result['lon'] = $sumlon / count($hood['polygons'][0]);
 			$ispoly = true;
 		}
-		echo 'ID: '.$result['ID'].' ; Name: '.$result['name'].' ; Net: '.$result['net'].' ; lat: '.$result['lat'].' ; lon: '.$result['lon'].' ; type: '.($ispoly ? 'poly' : 'classic').' ; <a href="http://keyserver.freifunk-franken.de/v2/?lat='.$result['lat'].'&long='.$result['lon'].'">zum Hoodfile</a><br>';
+		echo 'ID: '.$result['ID'].' ; Name: '.$result['name'].' ; lat: '.$result['lat'].' ; lon: '.$result['lon'].' ; type: '.($ispoly ? 'poly' : 'classic').' ; <a href="http://keyserver.freifunk-franken.de/v2/?lat='.$result['lat'].'&long='.$result['lon'].'">zum Hoodfile</a><br>';
 	}
 }
 

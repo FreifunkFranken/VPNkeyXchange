@@ -132,7 +132,7 @@ function getHoodById($hoodid)
 	try {
 		$q = 'SELECT '.hood_mysql_fields.' FROM hoods WHERE ID = :hoodid;';
 		$rs = db::getInstance()->prepare($q);
-		$rs->bindParam(':hoodid', $hoodid);
+		$rs->bindParam(':hoodid', $hoodid, PDO::PARAM_INT);
 		$rs->execute();
 	} catch (PDOException $e) {
 		exit(showError(500, $e));
@@ -142,15 +142,7 @@ function getHoodById($hoodid)
 
 function getTrainstation()
 {
-	try {
-		$q = 'SELECT '.hood_mysql_fields.' FROM hoods WHERE ID="0";';
-		$rs = db::getInstance()->prepare($q);
-		$rs->execute();
-	} catch (PDOException $e) {
-		exit(showError(500, $e));
-	}
-
-	return $rs->fetch(PDO::FETCH_ASSOC);
+	return getHoodById(0);
 }
 
 function getAllVPNs($hoodId)
@@ -259,14 +251,7 @@ function processPoly($point) {
 		debug("point in polygon #" . $polygon['polyid'] . ": " . $inside . "<br>");
 		if ($inside) {
 			debug("PolyHood gefunden...");
-			try {
-				$rs = db::getInstance()->prepare("SELECT ".hood_mysql_fields." FROM hoods WHERE id=:hoodid;");
-				$rs->bindParam(':hoodid', $polygon['hoodid'], PDO::PARAM_INT);
-				$rs->execute();
-			} catch (PDOException $e) {
-				exit(showError(500, $e));
-			}
-			$hood = $rs->fetch(PDO::FETCH_ASSOC);
+			$hood = getHoodById($polygon['hoodid']);
 			break;
 		}
 	}

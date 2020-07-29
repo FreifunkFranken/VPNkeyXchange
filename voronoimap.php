@@ -4,7 +4,7 @@ require_once "db.class.php";
 require "function.php";
 
 try {
-	$q = 'SELECT ID, name, lat, lon FROM hoods;';
+	$q = 'SELECT ID, active, name, lat, lon FROM hoods;';
 	$rs = db::getInstance()->prepare($q);
 	$rs->execute();
 } catch (PDOException $e) {
@@ -20,7 +20,8 @@ while ( $result = $rs->fetch ( PDO::FETCH_ASSOC ) ) {
 			'type' => $result ['name'],
 			'lat' => $result ['lat'],
 			'lon' => $result ['lon'],
-			'color' => "#F00"
+			'active' => intval($result['active']),
+			'color' => $result['active'] ? "#3366ff" : "#ff0000"
 		));
 		array_push($hoodssort,$result['name']);
 	}
@@ -274,7 +275,9 @@ p {
 
 			labels.append("input")
 					.attr('type', 'checkbox')
-					.property('checked', true)
+					.property('checked', function(d) {
+						return (d.color!='#ff0000');
+					 })
 					.attr("value", function(d) {
 						return d.type;
 					 }).on("change", drawWithLoading);

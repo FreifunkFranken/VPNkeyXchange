@@ -101,6 +101,7 @@ INSERT INTO `hoods` (`ID`, `active`, `name`, `lat`, `lon`, `prefix`, `ntp_ip`, `
 
 CREATE TABLE `polyhoods` (
   `polyid` int(10) unsigned NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT 0,
   `hoodid` int(10) unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -108,9 +109,9 @@ CREATE TABLE `polyhoods` (
 -- Dumping data for table `polyhoods`
 --
 
-INSERT INTO `polyhoods` (`polyid`, `hoodid`) VALUES
-(1, 31),
-(2, 32);
+INSERT INTO `polyhoods` (`polyid`, `active`, `hoodid`) VALUES
+(1, 1, 31),
+(2, 1, 32);
 
 -- --------------------------------------------------------
 

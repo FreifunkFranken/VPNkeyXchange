@@ -179,6 +179,7 @@ function getPolyhoodsByHood()
 		$rs = db::getInstance()->query("
 			SELECT polyhoods.polyid, lat, lon, hoodid
 			FROM polyhoods INNER JOIN polygons ON polyhoods.polyid = polygons.polyid
+			WHERE polyhoods.active=1
 			ORDER BY hoodid ASC, polyid ASC, ID ASC;
 		");
 		$rs->execute();
@@ -211,7 +212,7 @@ function processPoly($point) {
 			SELECT polyhoods.polyid, hoodid, MIN(polygons.lat) AS minlat, MIN(polygons.lon) AS minlon, MAX(polygons.lat) AS maxlat, MAX(polygons.lon) AS maxlon
 			FROM polyhoods INNER JOIN polygons ON polyhoods.polyid = polygons.polyid
 			INNER JOIN hoods ON hoods.ID = polyhoods.hoodid
-			WHERE hoods.active=1
+			WHERE hoods.active=1 AND polyhoods.active=1
 			GROUP BY polyid, hoodid
 		"); // This query will automatically exclude polyhoods being present in polyhoods table, but without vertices in polygons table
 		$rc->execute();

@@ -25,8 +25,8 @@ while ( $result = $rs->fetch ( PDO::FETCH_ASSOC ) ) {
 			$sumlat += $poly['lat'];
 			$sumlon += $poly['lon'];
 		}
-		$result['lat'] = $sumlat / count($polygons[0]);
-		$result['lon'] = $sumlon / count($polygons[0]);
+		$result['lat'] = round($sumlat / count($polygons[0]),6);
+		$result['lon'] = round($sumlon / count($polygons[0]),6);
 		$ispoly = true;
 	}
 

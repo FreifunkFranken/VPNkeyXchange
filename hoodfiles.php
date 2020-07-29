@@ -6,7 +6,7 @@ require "function.php";
 $polydata = getPolyhoodsByHood(); // read polygon data for later use
 
 try {
-	$q = 'SELECT ID, name, lat, lon, ESSID_AP FROM hoods;';
+	$q = 'SELECT ID, active, name, lat, lon, ESSID_AP FROM hoods;';
 	$rs = db::getInstance()->prepare($q);
 	$rs->execute();
 } catch (PDOException $e) {
@@ -31,7 +31,7 @@ while ( $result = $rs->fetch ( PDO::FETCH_ASSOC ) ) {
 		$ispoly = true;
 	}
 
-	echo 'ID: '.$result['ID'].' ; Name: '.$result['name'].' ; lat: '.$result['lat'].' ; lon: '.$result['lon'].' ; type: '.($ispoly ? 'poly' : 'classic').' ; <a href="index.php?hoodid='.$result['ID'].'">zum Hoodfile</a><br>';
+	echo 'ID: '.$result['ID'].' ; Name: '.$result['name'].' ; active: '.$result['active'].' ; lat: '.$result['lat'].' ; lon: '.$result['lon'].' ; type: '.($ispoly ? 'poly' : 'classic').' ; <a href="index.php?hoodid='.$result['ID'].'">zum Hoodfile</a><br>';
 }
 
 ?>

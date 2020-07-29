@@ -6,7 +6,7 @@ require "function.php";
 $polydata = getPolyhoodsByHood(); // read polygon data for later use
 
 try {
-	$q = 'SELECT ID, name, lat, lon, ESSID_AP FROM hoods;';
+	$q = 'SELECT ID, active, name, lat, lon, ESSID_AP FROM hoods;';
 	$rs = db::getInstance()->prepare($q);
 	$rs->execute();
 } catch (PDOException $e) {
@@ -16,7 +16,8 @@ try {
 $hoods = array();
 while ( $result = $rs->fetch ( PDO::FETCH_ASSOC ) ) {
 	$hood = array();
-	$hood['id']   = intval($result['ID']);
+	$hood['id'] = intval($result['ID']);
+	$hood['active'] = $result['active'];
 	$hood['name'] = $result['name'];
 	$hood['essid_ap'] = $result['ESSID_AP'];
 	if ($result ['lat'] > 0 && $result ['lon'] > 0) {

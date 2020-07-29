@@ -96,7 +96,7 @@ function getHoodByGeo($lat, $lon)
 
 	// load hoods from DB
 	try {
-		$q = 'SELECT '.hood_mysql_fields.' FROM hoods WHERE lat IS NOT NULL AND lon IS NOT NULL;';
+		$q = 'SELECT '.hood_mysql_fields.' FROM hoods WHERE lat IS NOT NULL AND lon IS NOT NULL AND active=1;';
 		$rs = db::getInstance()->prepare($q);
 		$rs->execute();
 	} catch (PDOException $e) {
@@ -208,8 +208,10 @@ function processPoly($point) {
 	// First only retrieve list of polyids
 	try {
 		$rc = db::getInstance()->prepare("
-			SELECT polyhoods.polyid, hoodid, MIN(lat) AS minlat, MIN(lon) AS minlon, MAX(lat) AS maxlat, MAX(lon) AS maxlon
+			SELECT polyhoods.polyid, hoodid, MIN(polygons.lat) AS minlat, MIN(polygons.lon) AS minlon, MAX(polygons.lat) AS maxlat, MAX(polygons.lon) AS maxlon
 			FROM polyhoods INNER JOIN polygons ON polyhoods.polyid = polygons.polyid
+			INNER JOIN hoods ON hoods.ID = polyhoods.hoodid
+			WHERE hoods.active=1
 			GROUP BY polyid, hoodid
 		"); // This query will automatically exclude polyhoods being present in polyhoods table, but without vertices in polygons table
 		$rc->execute();

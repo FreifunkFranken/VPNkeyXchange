@@ -1,5 +1,6 @@
 <?php
 
+require_once "db.class.php";
 require "function.php";
 
 try {

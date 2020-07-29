@@ -1,5 +1,6 @@
 <?php
 
+require_once "db.class.php";
 require "function.php";
 
 $polydata = getPolyhoodsByHood(); // read polygon data for later use
